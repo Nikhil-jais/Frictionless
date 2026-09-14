@@ -4,42 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Frictionless — Make Things Simple</title>
+    <title>Frictionless — Your Personal Productivity OS</title>
 
     <meta
         name="description"
-        content="Frictionless is a modern productivity workspace designed to make everyday digital tasks simpler."
+        content="Frictionless is a modern personal productivity workspace for tasks, goals, focus, planning and progress."
     >
 
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-
-    <div class="background-orb orb-one"></div>
-    <div class="background-orb orb-two"></div>
+<body> 
+ 
     <div class="background-grid"></div>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div> 
+    <div class="background-orb orb-three"></div>
 
+    <!-- =========================
+         TOP NAVIGATION
+    ========================== -->
+ 
     <header class="topbar">
 
-        <div class="brand">
-            <div class="brand-mark">F</div>
+        <a class="brand" href="#top" aria-label="Frictionless home">
 
-            <div>
-                <h1>Frictionless</h1>
-                <span>make things simple</span>
+            <div class="brand-mark">
+                F 
             </div>
-        </div>
+
+            <div class="brand-copy"> 
+                <h1>Frictionless</h1>
+                <span>PERSONAL PRODUCTIVITY OS</span>
+            </div>
+
+        </a>
+
+        <nav class="top-nav" aria-label="Main navigation">
+
+            <button class="nav-link active" data-scroll="dashboard">
+                Overview
+            </button>
+
+            <button class="nav-link" data-scroll="planning">
+                Planning
+            </button>
+
+            <button class="nav-link" data-scroll="analytics">
+                Analytics
+            </button>
+
+            <button class="nav-link" data-scroll="goals">
+                Goals
+            </button>
+
+        </nav>
 
         <div class="top-actions">
 
-            <button class="icon-button" id="themeButton" title="Change theme">
+            <button
+                class="icon-button"
+                id="searchButton"
+                title="Search workspace"
+                aria-label="Search workspace"
+            >
+                ⌕
+            </button>
+
+            <button
+                class="icon-button"
+                id="themeButton"
+                title="Change theme"
+                aria-label="Change theme"
+            >
                 ◐
+            </button>
+
+            <button
+                class="icon-button"
+                id="settingsButton"
+                title="Settings"
+                aria-label="Settings"
+            >
+                ⚙
             </button>
 
             <div class="status-pill">
                 <span class="status-dot"></span>
-                Workspace ready
+                <span>Workspace ready</span>
             </div>
 
         </div>
@@ -47,16 +99,20 @@
     </header>
 
 
-    <main class="app-container">
+    <main class="app-container" id="top">
 
-        <section class="hero-section">
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero-section" id="dashboard">
 
             <div class="hero-copy">
 
-                <span class="eyebrow">
+                <div class="hero-badge">
                     <span>✦</span>
                     YOUR DIGITAL WORKSPACE
-                </span>
+                </div>
 
                 <h2>
                     Remove the friction.
@@ -64,29 +120,88 @@
                 </h2>
 
                 <p>
-                    Organize your priorities, focus on what matters,
-                    and keep everyday tasks moving without unnecessary steps.
+                    Plan your day, focus on meaningful work, track your progress,
+                    and turn small actions into consistent momentum.
                 </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="hero-primary"
+                        id="addTaskButton"
+                    >
+                        <span>＋</span>
+                        New task
+                    </button>
+
+                    <button
+                        class="hero-secondary"
+                        id="focusButton"
+                    >
+                        <span>◉</span>
+                        Focus mode
+                    </button>
+
+                </div>
 
             </div>
 
-            <div class="hero-clock">
-                <span id="currentDate">Today</span>
-                <strong id="currentTime">00:00</strong>
+            <div class="hero-side">
+
+                <div class="live-card">
+
+                    <div class="live-card-top">
+                        <span>LOCAL TIME</span>
+                        <span class="live-indicator">
+                            <i></i>
+                            LIVE
+                        </span>
+                    </div>
+
+                    <strong id="currentTime">
+                        00:00
+                    </strong>
+
+                    <span id="currentDate">
+                        Today
+                    </span>
+
+                </div>
+
+                <div class="streak-card">
+
+                    <span class="streak-icon">🔥</span>
+
+                    <div>
+                        <strong id="streakStat">0</strong>
+                        <span>day streak</span>
+                    </div>
+
+                </div>
+
             </div>
 
         </section>
 
+
+        <!-- =========================
+             QUICK ACTIONS
+        ========================== -->
 
         <section class="quick-actions">
 
-            <button class="action-card action-primary" id="addTaskButton">
+            <button
+                class="action-card action-primary"
+                id="quickTaskButton"
+            >
 
-                <div class="action-icon">＋</div>
+                <div class="action-icon">
+                    ＋
+                </div>
 
                 <div>
                     <strong>New task</strong>
-                    <span>Add something you need to finish</span>
+                    <span>Turn an idea into an action</span>
                 </div>
 
                 <b>→</b>
@@ -94,13 +209,18 @@
             </button>
 
 
-            <button class="action-card" id="focusButton">
+            <button
+                class="action-card"
+                id="quickFocusButton"
+            >
 
-                <div class="action-icon">◉</div>
+                <div class="action-icon focus-icon">
+                    ◉
+                </div>
 
                 <div>
-                    <strong>Focus mode</strong>
-                    <span>Start a distraction-free session</span>
+                    <strong>Focus session</strong>
+                    <span>Protect time for deep work</span>
                 </div>
 
                 <b>→</b>
@@ -108,13 +228,37 @@
             </button>
 
 
-            <button class="action-card" id="noteButton">
+            <button
+                class="action-card"
+                id="quickNoteButton"
+            >
 
-                <div class="action-icon">✎</div>
+                <div class="action-icon note-icon">
+                    ✎
+                </div>
 
                 <div>
                     <strong>Quick note</strong>
-                    <span>Capture an idea before it disappears</span>
+                    <span>Capture something before it disappears</span>
+                </div>
+
+                <b>→</b>
+
+            </button>
+
+
+            <button
+                class="action-card"
+                id="quickGoalButton"
+            >
+
+                <div class="action-icon goal-icon">
+                    🎯
+                </div>
+
+                <div>
+                    <strong>New goal</strong>
+                    <span>Give your progress a direction</span>
                 </div>
 
                 <b>→</b>
@@ -124,19 +268,122 @@
         </section>
 
 
+        <!-- =========================
+             TODAY SNAPSHOT
+        ========================== -->
+
+        <section class="snapshot-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-kicker">TODAY</span>
+                    <h3>Your productivity snapshot</h3>
+                </div>
+
+                <span class="section-hint">
+                    Everything important, at a glance
+                </span>
+
+            </div>
+
+
+            <div class="snapshot-grid">
+
+                <div class="snapshot-card">
+
+                    <div class="snapshot-icon task-snapshot-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <strong id="completedStat">0</strong>
+                        <span>Completed tasks</span>
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-card">
+
+                    <div class="snapshot-icon active-snapshot-icon">
+                        →
+                    </div>
+
+                    <div>
+                        <strong id="activeStat">0</strong>
+                        <span>Tasks remaining</span>
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-card">
+
+                    <div class="snapshot-icon focus-snapshot-icon">
+                        ◉
+                    </div>
+
+                    <div>
+                        <strong id="focusStat">0</strong>
+                        <span>Focus minutes</span>
+                    </div>
+
+                </div>
+
+
+                <div class="snapshot-card">
+
+                    <div class="snapshot-icon progress-snapshot-icon">
+                        ↗
+                    </div>
+
+                    <div>
+                        <strong id="progressStat">0%</strong>
+                        <span>Completion rate</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MAIN PRODUCTIVITY GRID
+        ========================== -->
+
         <section class="dashboard-grid">
+
+            <!-- TASKS -->
 
             <div class="panel tasks-panel">
 
                 <div class="panel-header">
 
                     <div>
-                        <span class="panel-label">TODAY</span>
+                        <span class="panel-label">TASK MANAGER</span>
                         <h3>Priority tasks</h3>
                     </div>
 
-                    <div class="task-counter" id="taskCounter">
-                        0 tasks
+                    <div class="panel-header-actions">
+
+                        <span
+                            class="task-counter"
+                            id="taskCounter"
+                        >
+                            0 tasks
+                        </span>
+
+                        <button
+                            class="mini-action"
+                            id="taskSortButton"
+                            title="Sort tasks"
+                        >
+                            ↕
+                        </button>
+
                     </div>
 
                 </div>
@@ -151,40 +398,85 @@
                         autocomplete="off"
                     >
 
-                    <button id="createTaskButton">Add</button>
-
-                </div>
-
-
-                <div class="task-filters">
-
-                    <button class="filter-button active" data-filter="all">
-                        All
-                    </button>
-
-                    <button class="filter-button" data-filter="active">
-                        Active
-                    </button>
-
-                    <button class="filter-button" data-filter="completed">
-                        Completed
+                    <button id="createTaskButton">
+                        Add task
                     </button>
 
                 </div>
 
 
-                <div class="task-list" id="taskList"></div>
+                <div class="task-tools">
 
-                <div class="empty-state" id="taskEmpty">
+                    <div class="task-filters">
+
+                        <button
+                            class="filter-button active"
+                            data-filter="all"
+                        >
+                            All
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            data-filter="active"
+                        >
+                            Active
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            data-filter="completed"
+                        >
+                            Completed
+                        </button>
+
+                    </div>
+
+                    <select
+                        id="categoryFilter"
+                        class="category-filter"
+                        aria-label="Filter by category"
+                    >
+                        <option value="all">All categories</option>
+                        <option value="work">Work</option>
+                        <option value="study">Study</option>
+                        <option value="personal">Personal</option>
+                        <option value="health">Health</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="task-list"
+                    id="taskList"
+                ></div>
+
+
+                <div
+                    class="empty-state"
+                    id="taskEmpty"
+                >
+
                     <div>✓</div>
+
                     <strong>Nothing blocking you</strong>
-                    <span>Add a task and start moving.</span>
+
+                    <span>
+                        Add a task and start moving.
+                    </span>
+
                 </div>
 
             </div>
 
 
+            <!-- SIDE COLUMN -->
+
             <div class="side-column">
+
+                <!-- FOCUS -->
 
                 <div class="panel focus-panel">
 
@@ -195,7 +487,10 @@
                             <h3>Deep work</h3>
                         </div>
 
-                        <span class="focus-status" id="focusStatus">
+                        <span
+                            class="focus-status"
+                            id="focusStatus"
+                        >
                             Ready
                         </span>
 
@@ -204,11 +499,25 @@
 
                     <div class="timer">
 
-                        <div class="timer-ring">
+                        <div
+                            class="timer-ring"
+                            id="timerRing"
+                        >
 
                             <div class="timer-inner">
-                                <strong id="timerDisplay">25:00</strong>
-                                <span>focus session</span>
+
+                                <span class="timer-small-label">
+                                    CURRENT SESSION
+                                </span>
+
+                                <strong id="timerDisplay">
+                                    25:00
+                                </strong>
+
+                                <span>
+                                    focus session
+                                </span>
+
                             </div>
 
                         </div>
@@ -218,7 +527,9 @@
 
                     <div class="timer-controls">
 
-                        <button id="timerStart">Start</button>
+                        <button id="timerStart">
+                            Start focus
+                        </button>
 
                         <button id="timerReset">
                             Reset
@@ -229,40 +540,167 @@
                 </div>
 
 
-                <div class="panel stats-panel">
+                <!-- STREAK -->
+
+                <div class="panel streak-panel">
 
                     <div class="panel-header">
 
                         <div>
-                            <span class="panel-label">PROGRESS</span>
-                            <h3>Today</h3>
+                            <span class="panel-label">CONSISTENCY</span>
+                            <h3>Daily streak</h3>
                         </div>
 
-                        <span class="stats-icon">↗</span>
+                        <span class="streak-fire">
+                            🔥
+                        </span>
 
                     </div>
 
 
-                    <div class="stats-grid">
+                    <div class="streak-main">
 
-                        <div class="stat">
-                            <strong id="completedStat">0</strong>
-                            <span>Completed</span>
+                        <strong id="streakLarge">
+                            0
+                        </strong>
+
+                        <div>
+                            <span>days</span>
+                            <small id="streakMessage">
+                                Start your streak today
+                            </small>
                         </div>
 
-                        <div class="stat">
-                            <strong id="activeStat">0</strong>
-                            <span>Remaining</span>
+                    </div>
+
+
+                    <div class="streak-week" id="streakWeek">
+
+                        <span data-day="0">M</span>
+                        <span data-day="1">T</span>
+                        <span data-day="2">W</span>
+                        <span data-day="3">T</span>
+                        <span data-day="4">F</span>
+                        <span data-day="5">S</span>
+                        <span data-day="6">S</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PLANNING
+        ========================== -->
+
+        <section
+            class="planning-section"
+            id="planning"
+        >
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-kicker">PLANNING</span>
+                    <h3>Schedule your momentum</h3>
+                </div>
+
+                <button
+                    class="small-button"
+                    id="todayButton"
+                >
+                    Today
+                </button>
+
+            </div>
+
+
+            <div class="planning-grid">
+
+                <!-- CALENDAR -->
+
+                <div class="panel calendar-panel">
+
+                    <div class="calendar-header">
+
+                        <button
+                            class="calendar-nav"
+                            id="previousMonth"
+                            aria-label="Previous month"
+                        >
+                            ‹
+                        </button>
+
+                        <div>
+                            <strong id="calendarMonth">
+                                Month
+                            </strong>
+                            <span id="calendarYear">
+                                2026
+                            </span>
                         </div>
 
-                        <div class="stat">
-                            <strong id="focusStat">0</strong>
-                            <span>Focus mins</span>
+                        <button
+                            class="calendar-nav"
+                            id="nextMonth"
+                            aria-label="Next month"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+
+                    <div class="calendar-weekdays">
+
+                        <span>MON</span>
+                        <span>TUE</span>
+                        <span>WED</span>
+                        <span>THU</span>
+                        <span>FRI</span>
+                        <span>SAT</span>
+                        <span>SUN</span>
+
+                    </div>
+
+
+                    <div
+                        class="calendar-grid"
+                        id="calendarGrid"
+                    ></div>
+
+                </div>
+
+
+                <!-- UPCOMING -->
+
+                <div class="panel upcoming-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-label">UP NEXT</span>
+                            <h3>Upcoming</h3>
                         </div>
 
-                        <div class="stat">
-                            <strong id="progressStat">0%</strong>
-                            <span>Progress</span>
+                        <span class="upcoming-count" id="upcomingCount">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="upcoming-list"
+                        id="upcomingList"
+                    >
+
+                        <div class="upcoming-empty">
+                            No scheduled tasks yet.
                         </div>
 
                     </div>
@@ -273,6 +711,178 @@
 
         </section>
 
+
+        <!-- =========================
+             ANALYTICS
+        ========================== -->
+
+        <section
+            class="analytics-section"
+            id="analytics"
+        >
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-kicker">INSIGHTS</span>
+                    <h3>Productivity analytics</h3>
+                </div>
+
+                <span class="analytics-period">
+                    Last 7 days
+                </span>
+
+            </div>
+
+
+            <div class="analytics-grid">
+
+                <div class="panel chart-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-label">ACTIVITY</span>
+                            <h3>Weekly momentum</h3>
+                        </div>
+
+                        <span
+                            class="trend-value"
+                            id="weeklyTrend"
+                        >
+                            +0%
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="activity-chart"
+                        id="activityChart"
+                    ></div>
+
+
+                    <div class="chart-labels">
+
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel analytics-summary">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-label">SUMMARY</span>
+                            <h3>Your numbers</h3>
+                        </div>
+
+                        <span class="stats-icon">
+                            ↗
+                        </span>
+
+                    </div>
+
+
+                    <div class="analytics-metrics">
+
+                        <div class="analytics-metric">
+                            <span>Total completed</span>
+                            <strong id="totalCompletedStat">0</strong>
+                        </div>
+
+                        <div class="analytics-metric">
+                            <span>Total focus</span>
+                            <strong id="totalFocusStat">0m</strong>
+                        </div>
+
+                        <div class="analytics-metric">
+                            <span>Best streak</span>
+                            <strong id="bestStreakStat">0d</strong>
+                        </div>
+
+                        <div class="analytics-metric">
+                            <span>Completion rate</span>
+                            <strong id="overallProgressStat">0%</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GOALS
+        ========================== -->
+
+        <section
+            class="goals-section"
+            id="goals"
+        >
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-kicker">DIRECTION</span>
+                    <h3>Goals</h3>
+                </div>
+
+                <button
+                    class="small-button"
+                    id="addGoalButton"
+                >
+                    ＋ New goal
+                </button>
+
+            </div>
+
+
+            <div
+                class="goals-grid"
+                id="goalsGrid"
+            ></div>
+
+
+            <div
+                class="goals-empty"
+                id="goalsEmpty"
+            >
+
+                <div class="empty-goal-icon">
+                    🎯
+                </div>
+
+                <strong>No goals yet</strong>
+
+                <span>
+                    Create a goal and turn progress into something measurable.
+                </span>
+
+                <button id="emptyGoalButton">
+                    Create your first goal
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             NOTES
+        ========================== -->
 
         <section class="notes-section">
 
@@ -285,7 +895,10 @@
                         <h3>Quick notes</h3>
                     </div>
 
-                    <button class="small-button" id="saveNoteButton">
+                    <button
+                        class="small-button"
+                        id="saveNoteButton"
+                    >
                         Save note
                     </button>
 
@@ -297,9 +910,17 @@
                     placeholder="Write an idea, reminder, plan or anything you don't want to lose..."
                 ></textarea>
 
+
                 <div class="note-footer">
-                    <span id="noteStatus">Autosaved locally</span>
-                    <span id="characterCount">0 characters</span>
+
+                    <span id="noteStatus">
+                        Autosaved locally
+                    </span>
+
+                    <span id="characterCount">
+                        0 characters
+                    </span>
+
                 </div>
 
             </div>
@@ -307,7 +928,14 @@
         </section>
 
 
-        <section class="search-section">
+        <!-- =========================
+             SEARCH
+        ========================== -->
+
+        <section
+            class="search-section"
+            id="searchSection"
+        >
 
             <div class="search-box">
 
@@ -316,15 +944,20 @@
                 <input
                     id="searchInput"
                     type="text"
-                    placeholder="Search your workspace..."
+                    placeholder="Search tasks, notes, goals..."
+                    autocomplete="off"
                 >
 
                 <kbd>CTRL K</kbd>
 
             </div>
 
-            <div class="search-result" id="searchResult">
-                Type to search your tasks and notes.
+
+            <div
+                class="search-result"
+                id="searchResult"
+            >
+                Type to search your workspace.
             </div>
 
         </section>
@@ -332,35 +965,69 @@
     </main>
 
 
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
     <footer>
 
-        <div>
-            <strong>Frictionless</strong>
-            <span>Less friction. More progress.</span>
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                F
+            </div>
+
+            <div>
+                <strong>Frictionless</strong>
+                <span>Less friction. More progress.</span>
+            </div>
+
         </div>
 
-        <span>
+        <div class="footer-center">
+            Your data stays on this device.
+        </div>
+
+        <div class="footer-credit">
             Built with care by Nikhil Jaiswal
-        </span>
+        </div>
 
     </footer>
 
 
-    <div class="modal-overlay" id="taskModal">
+    <!-- =========================
+         TASK MODAL
+    ========================== -->
 
-        <div class="modal">
+    <div
+        class="modal-overlay"
+        id="taskModal"
+    >
 
-            <button class="modal-close" id="closeTaskModal">
+        <div class="modal task-modal">
+
+            <button
+                class="modal-close"
+                id="closeTaskModal"
+                aria-label="Close"
+            >
                 ×
             </button>
 
-            <span class="panel-label">NEW TASK</span>
+            <span class="panel-label">
+                NEW TASK
+            </span>
 
             <h3>What's next?</h3>
 
             <p>
-                Add one clear action. Keep it simple.
+                Add one clear action and give it a little structure.
             </p>
+
+
+            <label>
+                Task name
+            </label>
 
             <input
                 id="modalTaskInput"
@@ -369,7 +1036,105 @@
                 autocomplete="off"
             >
 
-            <button class="modal-submit" id="modalAddTask">
+
+            <div class="modal-row">
+
+                <div class="modal-field">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select id="modalTaskCategory">
+
+                        <option value="work">
+                            Work
+                        </option>
+
+                        <option value="study">
+                            Study
+                        </option>
+
+                        <option value="personal" selected>
+                            Personal
+                        </option>
+
+                        <option value="health">
+                            Health
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="modal-field">
+
+                    <label>
+                        Priority
+                    </label>
+
+                    <select id="modalTaskPriority">
+
+                        <option value="low">
+                            Low
+                        </option>
+
+                        <option value="medium" selected>
+                            Medium
+                        </option>
+
+                        <option value="high">
+                            High
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-row">
+
+                <div class="modal-field">
+
+                    <label>
+                        Due date
+                    </label>
+
+                    <input
+                        id="modalTaskDate"
+                        type="date"
+                    >
+
+                </div>
+
+
+                <div class="modal-field">
+
+                    <label>
+                        Reminder
+                    </label>
+
+                    <input
+                        id="modalTaskReminder"
+                        type="time"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="modal-submit"
+                id="modalAddTask"
+            >
                 Create task
             </button>
 
@@ -378,9 +1143,299 @@
     </div>
 
 
-    <div class="toast" id="toast">
+    <!-- =========================
+         GOAL MODAL
+    ========================== -->
+
+    <div
+        class="modal-overlay"
+        id="goalModal"
+    >
+
+        <div class="modal goal-modal">
+
+            <button
+                class="modal-close"
+                id="closeGoalModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <span class="panel-label">
+                NEW GOAL
+            </span>
+
+            <h3>Where are you going?</h3>
+
+            <p>
+                Create something measurable that you want to move forward.
+            </p>
+
+
+            <label>
+                Goal name
+            </label>
+
+            <input
+                id="goalNameInput"
+                type="text"
+                placeholder="e.g. Complete my portfolio"
+                autocomplete="off"
+            >
+
+
+            <div class="modal-row">
+
+                <div class="modal-field">
+
+                    <label>
+                        Target
+                    </label>
+
+                    <input
+                        id="goalTargetInput"
+                        type="number"
+                        min="1"
+                        value="10"
+                    >
+
+                </div>
+
+
+                <div class="modal-field">
+
+                    <label>
+                        Deadline
+                    </label>
+
+                    <input
+                        id="goalDateInput"
+                        type="date"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="modal-submit"
+                id="createGoalButton"
+            >
+                Create goal
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         SETTINGS
+    ========================== -->
+
+    <div
+        class="modal-overlay"
+        id="settingsModal"
+    >
+
+        <div class="modal settings-modal">
+
+            <button
+                class="modal-close"
+                id="closeSettingsModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <span class="panel-label">
+                PERSONALIZATION
+            </span>
+
+            <h3>Workspace settings</h3>
+
+            <p>
+                Make Frictionless feel like your own workspace.
+            </p>
+
+
+            <div class="settings-section">
+
+                <span class="settings-title">
+                    COLOR THEME
+                </span>
+
+                <div
+                    class="theme-grid"
+                    id="themeGrid"
+                >
+
+                    <button
+                        class="theme-option"
+                        data-theme="aurora"
+                    >
+                        <span class="theme-preview theme-aurora"></span>
+                        <strong>Aurora</strong>
+                        <small>Indigo + cyan</small>
+                    </button>
+
+
+                    <button
+                        class="theme-option"
+                        data-theme="ocean"
+                    >
+                        <span class="theme-preview theme-ocean"></span>
+                        <strong>Ocean</strong>
+                        <small>Blue + aqua</small>
+                    </button>
+
+
+                    <button
+                        class="theme-option"
+                        data-theme="sunset"
+                    >
+                        <span class="theme-preview theme-sunset"></span>
+                        <strong>Sunset</strong>
+                        <small>Coral + orange</small>
+                    </button>
+
+
+                    <button
+                        class="theme-option"
+                        data-theme="emerald"
+                    >
+                        <span class="theme-preview theme-emerald"></span>
+                        <strong>Emerald</strong>
+                        <small>Green + mint</small>
+                    </button>
+
+
+                    <button
+                        class="theme-option"
+                        data-theme="cosmic"
+                    >
+                        <span class="theme-preview theme-cosmic"></span>
+                        <strong>Cosmic</strong>
+                        <small>Violet + pink</small>
+                    </button>
+
+
+                    <button
+                        class="theme-option"
+                        data-theme="ember"
+                    >
+                        <span class="theme-preview theme-ember"></span>
+                        <strong>Ember</strong>
+                        <small>Red + amber</small>
+                    </button>
+
+
+                    <button
+                        class="theme-option"
+                        data-theme="bloom"
+                    >
+                        <span class="theme-preview theme-bloom"></span>
+                        <strong>Bloom</strong>
+                        <small>Rose + lavender</small>
+                    </button>
+
+
+                    <button
+                        class="theme-option"
+                        data-theme="solar"
+                    >
+                        <span class="theme-preview theme-solar"></span>
+                        <strong>Solar</strong>
+                        <small>Gold + navy</small>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-section">
+
+                <span class="settings-title">
+                    APPEARANCE
+                </span>
+
+                <div class="appearance-options">
+
+                    <button
+                        class="appearance-option active"
+                        data-appearance="dark"
+                    >
+                        ◐
+                        <span>Dark</span>
+                    </button>
+
+                    <button
+                        class="appearance-option"
+                        data-appearance="light"
+                    >
+                        ☼
+                        <span>Light</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-section settings-danger">
+
+                <span class="settings-title">
+                    LOCAL DATA
+                </span>
+
+                <p>
+                    Your tasks, notes, goals and preferences are stored locally
+                    in your browser.
+                </p>
+
+                <div class="settings-data-actions">
+
+                    <button
+                        class="secondary-button"
+                        id="exportDataButton"
+                    >
+                        Export data
+                    </button>
+
+                    <button
+                        class="danger-button"
+                        id="clearDataButton"
+                    >
+                        Clear workspace
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
         <span>✓</span>
-        <p id="toastMessage">Done</p>
+
+        <p id="toastMessage">
+            Done
+        </p>
+
     </div>
 
 
