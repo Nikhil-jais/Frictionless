@@ -2,389 +2,165 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Frictionless — Make Things Simple</title>
-
-    <meta
-        name="description"
-        content="Frictionless is a modern productivity workspace designed to make everyday digital tasks simpler."
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#061329">
+    <title>FRICTIONLESS — Drift Between Worlds</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <div class="background-orb orb-one"></div>
-    <div class="background-orb orb-two"></div>
-    <div class="background-grid"></div>
+    <main id="gameShell">
 
-    <header class="topbar">
+        <canvas id="gameCanvas"></canvas>
 
-        <div class="brand">
-            <div class="brand-mark">F</div>
+        <div class="scanlines"></div>
+        <div class="vignette"></div>
 
-            <div>
-                <h1>Frictionless</h1>
-                <span>make things simple</span>
+        <header class="hud">
+            <div class="brand">
+                <span class="brand-mark">✦</span>
+                <div>
+                    <strong>FRICTIONLESS</strong>
+                    <small>DRIFT BETWEEN WORLDS</small>
+                </div>
+            </div>
+
+            <div class="hud-center">
+                <div class="world-name" id="worldName">OCEAN</div>
+                <div class="world-line">
+                    <span id="progressFill"></span>
+                </div>
+            </div>
+
+            <div class="score-box">
+                <span>SCORE</span>
+                <strong id="score">000000</strong>
+                <small>BEST <b id="bestScore">000000</b></small>
+            </div>
+        </header>
+
+        <div class="game-stats">
+            <div class="stat">
+                <span>COMBO</span>
+                <strong id="combo">x1</strong>
+            </div>
+
+            <div class="stat">
+                <span>SPEED</span>
+                <strong id="speed">1.0</strong>
+            </div>
+
+            <div class="stat">
+                <span>ENERGY</span>
+                <div class="energy-bar">
+                    <i id="energyFill"></i>
+                </div>
             </div>
         </div>
 
-        <div class="top-actions">
-
-            <button class="icon-button" id="themeButton" title="Change theme">
-                ◐
-            </button>
-
-            <div class="status-pill">
-                <span class="status-dot"></span>
-                Workspace ready
-            </div>
-
+        <div class="shield-indicator" id="shieldIndicator">
+            <span>◈</span>
+            SHIELD
         </div>
 
-    </header>
+        <button class="pause-button" id="pauseButton" aria-label="Pause game">
+            <span></span>
+            <span></span>
+        </button>
 
+        <section class="overlay active" id="startOverlay">
+            <div class="overlay-card">
+                <div class="eyebrow">AN EXPERIMENT IN MOTION</div>
 
-    <main class="app-container">
+                <h1>
+                    <span>FRICTION</span><br>
+                    <em>LESS</em>
+                </h1>
 
-        <section class="hero-section">
+                <p class="subtitle">DRIFT BETWEEN WORLDS</p>
 
-            <div class="hero-copy">
-
-                <span class="eyebrow">
-                    <span>✦</span>
-                    YOUR DIGITAL WORKSPACE
-                </span>
-
-                <h2>
-                    Remove the friction.
-                    <span>Keep the momentum.</span>
-                </h2>
-
-                <p>
-                    Organize your priorities, focus on what matters,
-                    and keep everyday tasks moving without unnecessary steps.
+                <p class="description">
+                    Ride the current. Break the atmosphere.<br>
+                    Collect energy, dodge the unknown, and keep moving.
                 </p>
 
-            </div>
+                <button class="primary-button" id="startButton">
+                    <span>START JOURNEY</span>
+                    <b>→</b>
+                </button>
 
-            <div class="hero-clock">
-                <span id="currentDate">Today</span>
-                <strong id="currentTime">00:00</strong>
+                <div class="controls">
+                    <span><b>WASD</b> MOVE</span>
+                    <span><b>SPACE</b> DASH</span>
+                    <span><b>P</b> PAUSE</span>
+                </div>
             </div>
-
         </section>
 
+        <section class="overlay" id="pauseOverlay">
+            <div class="overlay-card compact">
+                <div class="eyebrow">JOURNEY PAUSED</div>
+                <h2>STAY IN THE FLOW</h2>
+                <p>The world is waiting for you.</p>
 
-        <section class="quick-actions">
+                <button class="primary-button" id="resumeButton">
+                    <span>RESUME</span>
+                    <b>→</b>
+                </button>
 
-            <button class="action-card action-primary" id="addTaskButton">
-
-                <div class="action-icon">＋</div>
-
-                <div>
-                    <strong>New task</strong>
-                    <span>Add something you need to finish</span>
-                </div>
-
-                <b>→</b>
-
-            </button>
-
-
-            <button class="action-card" id="focusButton">
-
-                <div class="action-icon">◉</div>
-
-                <div>
-                    <strong>Focus mode</strong>
-                    <span>Start a distraction-free session</span>
-                </div>
-
-                <b>→</b>
-
-            </button>
-
-
-            <button class="action-card" id="noteButton">
-
-                <div class="action-icon">✎</div>
-
-                <div>
-                    <strong>Quick note</strong>
-                    <span>Capture an idea before it disappears</span>
-                </div>
-
-                <b>→</b>
-
-            </button>
-
+                <button class="text-button" id="restartFromPause">
+                    RESTART JOURNEY
+                </button>
+            </div>
         </section>
 
+        <section class="overlay" id="gameOverOverlay">
+            <div class="overlay-card compact">
+                <div class="eyebrow" id="endEyebrow">SIGNAL LOST</div>
+                <h2 id="endTitle">THE CURRENT ENDS</h2>
 
-        <section class="dashboard-grid">
+                <div class="final-score">
+                    <span>FINAL SCORE</span>
+                    <strong id="finalScore">000000</strong>
+                </div>
 
-            <div class="panel tasks-panel">
-
-                <div class="panel-header">
-
+                <div class="final-row">
                     <div>
-                        <span class="panel-label">TODAY</span>
-                        <h3>Priority tasks</h3>
+                        <span>BEST</span>
+                        <b id="finalBest">000000</b>
                     </div>
-
-                    <div class="task-counter" id="taskCounter">
-                        0 tasks
-                    </div>
-
-                </div>
-
-
-                <div class="task-input-row">
-
-                    <input
-                        id="taskInput"
-                        type="text"
-                        placeholder="What needs to get done?"
-                        autocomplete="off"
-                    >
-
-                    <button id="createTaskButton">Add</button>
-
-                </div>
-
-
-                <div class="task-filters">
-
-                    <button class="filter-button active" data-filter="all">
-                        All
-                    </button>
-
-                    <button class="filter-button" data-filter="active">
-                        Active
-                    </button>
-
-                    <button class="filter-button" data-filter="completed">
-                        Completed
-                    </button>
-
-                </div>
-
-
-                <div class="task-list" id="taskList"></div>
-
-                <div class="empty-state" id="taskEmpty">
-                    <div>✓</div>
-                    <strong>Nothing blocking you</strong>
-                    <span>Add a task and start moving.</span>
-                </div>
-
-            </div>
-
-
-            <div class="side-column">
-
-                <div class="panel focus-panel">
-
-                    <div class="panel-header">
-
-                        <div>
-                            <span class="panel-label">FOCUS</span>
-                            <h3>Deep work</h3>
-                        </div>
-
-                        <span class="focus-status" id="focusStatus">
-                            Ready
-                        </span>
-
-                    </div>
-
-
-                    <div class="timer">
-
-                        <div class="timer-ring">
-
-                            <div class="timer-inner">
-                                <strong id="timerDisplay">25:00</strong>
-                                <span>focus session</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="timer-controls">
-
-                        <button id="timerStart">Start</button>
-
-                        <button id="timerReset">
-                            Reset
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="panel stats-panel">
-
-                    <div class="panel-header">
-
-                        <div>
-                            <span class="panel-label">PROGRESS</span>
-                            <h3>Today</h3>
-                        </div>
-
-                        <span class="stats-icon">↗</span>
-
-                    </div>
-
-
-                    <div class="stats-grid">
-
-                        <div class="stat">
-                            <strong id="completedStat">0</strong>
-                            <span>Completed</span>
-                        </div>
-
-                        <div class="stat">
-                            <strong id="activeStat">0</strong>
-                            <span>Remaining</span>
-                        </div>
-
-                        <div class="stat">
-                            <strong id="focusStat">0</strong>
-                            <span>Focus mins</span>
-                        </div>
-
-                        <div class="stat">
-                            <strong id="progressStat">0%</strong>
-                            <span>Progress</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <section class="notes-section">
-
-            <div class="panel notes-panel">
-
-                <div class="panel-header">
-
                     <div>
-                        <span class="panel-label">THOUGHTS</span>
-                        <h3>Quick notes</h3>
+                        <span>MAX COMBO</span>
+                        <b id="finalCombo">x1</b>
                     </div>
-
-                    <button class="small-button" id="saveNoteButton">
-                        Save note
-                    </button>
-
+                    <div>
+                        <span>WORLD</span>
+                        <b id="finalWorld">OCEAN</b>
+                    </div>
                 </div>
 
-
-                <textarea
-                    id="noteInput"
-                    placeholder="Write an idea, reminder, plan or anything you don't want to lose..."
-                ></textarea>
-
-                <div class="note-footer">
-                    <span id="noteStatus">Autosaved locally</span>
-                    <span id="characterCount">0 characters</span>
-                </div>
-
+                <button class="primary-button" id="restartButton">
+                    <span>DRIFT AGAIN</span>
+                    <b>↻</b>
+                </button>
             </div>
-
         </section>
 
+        <div class="mobile-hint" id="mobileHint">
+            <span>DRAG</span> TO PILOT
+        </div>
 
-        <section class="search-section">
+        <div class="dash-ready" id="dashReady">
+            SPACE <span>READY</span>
+        </div>
 
-            <div class="search-box">
-
-                <span>⌕</span>
-
-                <input
-                    id="searchInput"
-                    type="text"
-                    placeholder="Search your workspace..."
-                >
-
-                <kbd>CTRL K</kbd>
-
-            </div>
-
-            <div class="search-result" id="searchResult">
-                Type to search your tasks and notes.
-            </div>
-
-        </section>
+        <footer class="footer">
+            <span>FRICTIONLESS // 01</span>
+            <span>NO DESTINATION REQUIRED</span>
+        </footer>
 
     </main>
 
-
-    <footer>
-
-        <div>
-            <strong>Frictionless</strong>
-            <span>Less friction. More progress.</span>
-        </div>
-
-        <span>
-            Built with care by Nikhil Jaiswal
-        </span>
-
-    </footer>
-
-
-    <div class="modal-overlay" id="taskModal">
-
-        <div class="modal">
-
-            <button class="modal-close" id="closeTaskModal">
-                ×
-            </button>
-
-            <span class="panel-label">NEW TASK</span>
-
-            <h3>What's next?</h3>
-
-            <p>
-                Add one clear action. Keep it simple.
-            </p>
-
-            <input
-                id="modalTaskInput"
-                type="text"
-                placeholder="e.g. Finish the homepage"
-                autocomplete="off"
-            >
-
-            <button class="modal-submit" id="modalAddTask">
-                Create task
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="toast" id="toast">
-        <span>✓</span>
-        <p id="toastMessage">Done</p>
-    </div>
-
-
     <script src="script.js"></script>
-
 </body>
 </html>
