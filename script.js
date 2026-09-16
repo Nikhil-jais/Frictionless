@@ -60,7 +60,7 @@ let pointer = {
     x: 0,
     y: 0
 };
-
+               
 let particles = [];
 let obstacles = [];
 let collectibles = [];
